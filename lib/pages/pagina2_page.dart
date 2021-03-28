@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_estados/models/usuario.dart';
+import 'package:flutter_estados/pages/pagina1_page.dart';
 import 'package:flutter_estados/services/usuario_service.dart';
 
 class Pagina2Page extends StatelessWidget {
@@ -7,7 +8,7 @@ class Pagina2Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pagina 2'),
+        title: _PageTitle(),
       ),
       body: Center(
         child: Column(
@@ -39,6 +40,25 @@ class Pagina2Page extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _PageTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('Pagina 2'),
+        StreamBuilder(
+          stream: usuarioService.usuarioStream,
+          builder: (BuildContext context, AsyncSnapshot<Usuario> snapshot){
+            return snapshot.hasData
+            ? Text('Nombre: ${snapshot.data.nombre}')
+            : Text('None');
+          }
+        )
+      ],
     );
   }
 }
