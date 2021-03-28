@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_estados/models/usuario.dart';
+import 'package:flutter_estados/services/usuario_service.dart';
 
 class Pagina1Page extends StatelessWidget {
   @override
@@ -7,16 +9,22 @@ class Pagina1Page extends StatelessWidget {
       appBar: AppBar(
         title: Text('Pagina 1'),
       ),
-      body: InformacionUsuario(),
+      body: usuarioService.existeUsuario
+          ? InformacionUsuario(usuarioService.usuario)
+          : Center(child: Text('No hay información del usuario')),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),
-        onPressed: ()=>Navigator.pushNamed(context, 'pagina2'),
+        onPressed: () => Navigator.pushNamed(context, 'pagina2'),
       ),
     );
   }
 }
 
 class InformacionUsuario extends StatelessWidget {
+  final Usuario usuario;
+
+  const InformacionUsuario(this.usuario);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,16 +34,17 @@ class InformacionUsuario extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('General',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+          Text('General',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           Divider(),
-          ListTile(title: Text('Nombre:')),
-          ListTile(title: Text('Edad:')),
-          Text('General',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+          ListTile(title: Text('Nombre: ${usuario.nombre}')),
+          ListTile(title: Text('Edad: ${usuario.edad}')),
+          Text('General',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           Divider(),
           ListTile(title: Text('Profesion 1:')),
           ListTile(title: Text('Profesion 1:')),
           ListTile(title: Text('Profesion 1:')),
-
         ],
       ),
     );
