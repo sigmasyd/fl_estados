@@ -6,9 +6,12 @@ import 'package:provider/provider.dart';
 class Pagina2Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final usuarioService = Provider.of<UsuarioService>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pagina 2'),
+        title: usuarioService.existeUsuario
+            ? Text('Nombre: ${usuarioService.usuario.nombre}')
+            : Text('Pagina 2'),
       ),
       body: Center(
         child: Column(
@@ -19,12 +22,12 @@ class Pagina2Page extends StatelessWidget {
                   style: TextStyle(color: Colors.white)),
               color: Colors.blue,
               onPressed: () {
-                final usuarioService = Provider.of<UsuarioService>(context,
+                /*final usuarioService = Provider.of<UsuarioService>(context,
                     //listen: true // aunque este por true, al estar dentro
                     // del metodo no podra redibujarse al no tener un metodo
                     // rebuild por lo cual dara error, por lo cual la
                     // recomendacion es set listen a false
-                    listen: false);
+                    listen: false);*/
                 final newUser = new Usuario(nombre: 'Carlos', edad: 39);
                 usuarioService.usuario = newUser;
               },
@@ -34,9 +37,9 @@ class Pagina2Page extends StatelessWidget {
                   Text('Cambiar edad', style: TextStyle(color: Colors.white)),
               color: Colors.blue,
               onPressed: () {
-                final usuarioService = Provider.of<UsuarioService>(
+                /*final usuarioService = Provider.of<UsuarioService>(
                   context,listen: false
-                );
+                );*/
                 if (usuarioService.existeUsuario) {
                   usuarioService.cambiarEdad(45);
                 }
