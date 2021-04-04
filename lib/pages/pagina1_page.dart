@@ -14,6 +14,14 @@ class Pagina1Page extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pagina 1'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              usuarioService.removerUsuario();
+            }
+          )
+        ],
       ),
       body: usuarioService.existeUsuario
           ? InformacionUsuario(usuarioService.usuario)

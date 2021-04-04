@@ -33,7 +33,14 @@ class Pagina2Page extends StatelessWidget {
               child:
                   Text('Cambiar edad', style: TextStyle(color: Colors.white)),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                final usuarioService = Provider.of<UsuarioService>(
+                  context,listen: false
+                );
+                if (usuarioService.existeUsuario) {
+                  usuarioService.cambiarEdad(45);
+                }
+              },
             ),
             MaterialButton(
               child: Text('Añadir Profesion',
