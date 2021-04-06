@@ -28,7 +28,13 @@ class Pagina2Page extends StatelessWidget {
                     // rebuild por lo cual dara error, por lo cual la
                     // recomendacion es set listen a false
                     listen: false);*/
-                final newUser = new Usuario(nombre: 'Carlos', edad: 39);
+                final newUser = new Usuario(
+                    nombre: 'Carlos',
+                    edad: 39,
+                    profesiones: [
+                      'Fullstack developer',
+                      'Video Jugador Experto'
+                    ]);
                 usuarioService.usuario = newUser;
               },
             ),
@@ -49,7 +55,9 @@ class Pagina2Page extends StatelessWidget {
               child: Text('Añadir Profesion',
                   style: TextStyle(color: Colors.white)),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                usuarioService.agregarProfesion();
+              },
             ),
           ],
         ),

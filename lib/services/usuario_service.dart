@@ -23,4 +23,12 @@ class UsuarioService with ChangeNotifier {
     this._usuario = null;
     notifyListeners();
   }
+
+  void agregarProfesion() {
+    this
+        ._usuario
+        .profesiones
+        .add('Profesion ${this._usuario.profesiones.length + 1}');
+    notifyListeners();
+  }
 }
